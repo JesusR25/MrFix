@@ -277,6 +277,11 @@ router.route('/mecanicos/idm').get((request,response)=>{
 });
 
 //RUTAS DE CLIENTES
+router.route('/ventas/last').get((request,response)=>{
+    ventasWS.getIDlast().then(result=>{
+        response.json(result[0])
+    })
+});
 
 //Ruta para obtener los clientes
 router.route('/clientes').get((request,response)=>{
