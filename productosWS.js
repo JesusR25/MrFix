@@ -11,36 +11,6 @@ async function getProductos(){
         console.log(err);
     }
 }
-//NUEVOS METODOS EN APP
-async function getProductosAsc(){
-    try{
-        let pool=await sql.connect(conexion);
-        let salida=await pool.request().query('select * from Productos ORDER BY PrecioProducto');
-        return salida.recordsets;
-    }catch(err){
-        console.log(err);
-    }
-}
-//NUEVO METODO EN APP
-async function getProductosDesc(){
-    try{
-        let pool=await sql.connect(conexion);
-        let salida=await pool.request().query('select * from Productos ORDER BY PrecioProducto DESC');
-        return salida.recordsets;
-    }catch(err){
-        console.log(err);
-    }
-}
-//NUEVO METODO EN APP
-async function getProductosAlfa(){
-    try{
-        let pool=await sql.connect(conexion);
-        let salida=await pool.request().query('select * from Productos ORDER BY NombreProducto');
-        return salida.recordsets;
-    }catch(err){
-        console.log(err);
-    }
-}
 
 //Consulta un servicio especifico
 async function getProducto(IDProducto){
@@ -119,14 +89,45 @@ async function getIDProductos(){
         console.log(err);
     }
 }
+
+//NUEVOS METODOS EN APP
+async function getProductosAsc(){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request().query('select * from Productos ORDER BY PrecioProducto');
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
+    //NUEVO METODO EN APP
+async function getProductosDesc(){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request().query('select * from Productos ORDER BY PrecioProducto DESC');
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
+    //NUEVO METODO EN APP
+async function getProductosAlfa(){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request().query('select * from Productos ORDER BY NombreProducto');
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
 module.exports={
     getProductos:getProductos,
-    getProductosAsc: getProductosAsc,
-    getProductosDesc: getProductosDesc,
-    getProductosAlfa:getProductosAlfa,
     getProducto:getProducto,
     newProducto:newProducto,  
     upProducto:upProducto,
     delProducto:delProducto,
-    getIDProductos:getIDProductos
+    getIDProductos:getIDProductos,
+    getProductosDesc:getProductosDesc,
+    getProductosAsc:getProductosAsc,
+    getProductosAlfa:getProductosAlfa
 }

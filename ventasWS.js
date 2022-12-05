@@ -32,6 +32,7 @@ async function newVenta(venta){
         let newVenta=await pool.request()
         //    .input('IDServicio',sql.Int,servicio.IDServicio)
             .input('FechaVenta',sql.VarChar,venta.FechaVenta)
+            .input('Total',sql.Money,venta.Total)
             .input('IDCliente',sql.Int,venta.IDCliente)
             .input('IDEmpleado',sql.Int,venta.IDEmpleado)
             .execute('pr_newVenta');
@@ -50,6 +51,7 @@ async function upVenta(venta){
         let upVenta=await pool.request()
             .input('IDVenta',sql.Int,venta.IDVenta)
             .input('FechaVenta',sql.VarChar,venta.FechaVenta)
+            .input('Total',sql.Money,venta.Total)
             .input('IDCliente',sql.Int,venta.IDCliente)
             .input('IDEmpleado',sql.Int,venta.IDEmpleado)
             .execute('pr_upVenta');
@@ -58,6 +60,20 @@ async function upVenta(venta){
         
     } catch (err) {
         throw new Error ('Se presentó un error en el procedimiento almacenado actualizar venta');
+    }
+}
+async function upTotal(venta){
+    try{
+        let pool=await sql.connect(conexion);
+        let upTotal=await pool.request()
+            .input('IDVenta',sql.Int,venta.IDVenta)
+            .input('Total',sql.Money,venta.Total)
+            .execute('pr_upTotal');
+
+        return upTotal.recordsets;
+        
+    } catch (err) {
+        throw new Error ('Se presentó un error en el procedimiento almacenado actualizar total venta');
     }
 }
 
@@ -85,11 +101,24 @@ async function getIDVentas(){
         console.log(err);
     }
 }
+
+async function getIDlast(){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request().query('SELECT TOP 1 IDVenta=(IDVenta+1) FROM Ventas ORDER BY IDVenta DESC');
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
+
 module.exports={
     getVentas:getVentas,
     getVenta:getVenta,
     newVenta:newVenta,
     upVenta:upVenta,
+    upTotal:upTotal,
     delVenta:delVenta,
-    getIDVentas:getIDVentas
+    getIDVentas:getIDVentas,
+    getIDlast:getIDlast
 }

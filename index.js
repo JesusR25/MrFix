@@ -527,6 +527,35 @@ router.route('/reparaciones/eliminar/:IDReparacion').get((request,response)=>{
     })
 });
 
+
+//RUTAS PARA APP
+//OBTENER SERVICIO POR TOKEN
+router.route('/reparaciones/consultarMov').post((request,response)=>{
+    let Reparacion = {...request.body}
+    reparacionesWS.getReparacion(Reparacion.IDReparacion).then(result=>{
+        response.json(result[0][0])
+    })
+});
+
+//OBTENER VEHICULO MEDIANTE ID
+router.route('/vehiculo/consultarMov').post((request,response)=>{
+    let Vehiculo = {...request.body}
+    vehiculosWS.getVehiculo(Vehiculo.IDVehiculo).then(result=>{
+        response.json(result[0][0])
+    })
+});
+
+//OBTENER VEHICULOS MEDIANTE IDCLIENTE
+router.route('/vehiculo/consultarVehiMov').post((request,response)=>{
+    let Vehiculo = {...request.body}
+    vehiculosWS.getVehiculoCliente(Vehiculo.IDCliente).then(result=>{
+        response.json(result[0])
+    })
+});
+
+
+
+
 // RUTAS PARA DETALLES
 
 //Ruta para obtener los detalles

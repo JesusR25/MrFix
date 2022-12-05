@@ -86,6 +86,7 @@ async function delCliente(IDCliente){
 }
 
 //CAMBIOS EN CLASE CLIENTESWS
+//Esto es para movil
 //Funcion para obtener cliente por correo y contraseña
 async function getClienteMov(cliente){
     try{
@@ -116,7 +117,7 @@ async function getClienteInf(cliente){
 async function getIDClientes(){
     try{
         let pool=await sql.connect(conexion);
-        let salida=await pool.request().query('select IDCliente from Clientes');
+        let salida=await pool.request().query("select IDCliente from Clientes");
         return salida.recordsets;
     }catch(err){
         console.log(err);

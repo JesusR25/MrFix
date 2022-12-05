@@ -36,6 +36,8 @@ async function newEmpleado(empleado){
             .input('ApeMatEmpleado',sql.VarChar,empleado.ApeMatEmpleado)
             .input('CorreoEmpleado',sql.VarChar,empleado.CorreoEmpleado)
             .input('TelefonoEmpleado',sql.VarChar,empleado.TelefonoEmpleado)
+            .input('Username',sql.VarChar,empleado.Username)
+            .input('Contraseña',sql.VarChar,empleado.Contraseña)
             .execute('pr_newEmpleado');
 
         return newEmpleado.recordsets;
@@ -56,6 +58,8 @@ async function upEmpleado(empleado){
             .input('ApeMatEmpleado',sql.VarChar,empleado.ApeMatEmpleado)
             .input('CorreoEmpleado',sql.VarChar,empleado.CorreoEmpleado)
             .input('TelefonoEmpleado',sql.VarChar,empleado.TelefonoEmpleado)
+            .input('Username',sql.VarChar,empleado.Username)
+            .input('Contraseña',sql.VarChar,empleado.Contraseña)
             .execute('pr_upEmpleado');
 
         return upEmpleado.recordsets;
@@ -79,11 +83,22 @@ async function delEmpleado(IDEmpleado){
         throw new Error ('Se presentó un error en el procedimiento almacenado eliminar empleado');
     }
 }
-
+async function getEmpleadoMov(empleado){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request()
+        .input('Username',sql.VarChar,empleado.Username)
+        .input('Contraseña', sql.VarChar,empleado.Contraseña)
+        .query('select * from Empleados where Username= @Username AND Contraseña= @Contraseña');
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
 async function getIDEmpleados(){
     try{
         let pool=await sql.connect(conexion);
-        let salida=await pool.request().query('select IDEmpleado from Empleados');
+        let salida=await pool.request().query("select IDEmpleado from Empleados");
         return salida.recordsets;
     }catch(err){
         console.log(err);
@@ -95,5 +110,6 @@ module.exports={
     newEmpleado:newEmpleado,
     upEmpleado:upEmpleado,
     delEmpleado:delEmpleado,
+    getEmpleadoMov:getEmpleadoMov,
     getIDEmpleados:getIDEmpleados
 }

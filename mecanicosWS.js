@@ -1,7 +1,7 @@
 const conexion=require('./conexion.js');
 const sql=require('mssql');
 
-//Consulta de todos los empleados
+//Consulta de todos los mecanicos
 async function getMecanicos(){
     try{
         let pool=await sql.connect(conexion);
@@ -12,7 +12,7 @@ async function getMecanicos(){
     }
 }
 
-//Consulta un servicio especifico
+//Consulta un mecanico especifico
 async function getMecanico(IDMecanico){
     try{
         let pool=await sql.connect(conexion);
@@ -36,7 +36,8 @@ async function newMecanico(mecanico){
             .input('ApeMatMecanico',sql.VarChar,mecanico.ApeMatMecanico)
             .input('CorreoMecanico',sql.VarChar,mecanico.CorreoMecanico)
             .input('TelefonoMecanico',sql.VarChar,mecanico.TelefonoMecanico)
-            .input('Area',sql.VarChar,mecanico.Area)
+            .input('Username',sql.VarChar,mecanico.Username)
+            .input('Contraseña',sql.VarChar,mecanico.Contraseña)
             .execute('pr_newMecanico');
 
         return newMecanico.recordsets;
@@ -57,7 +58,8 @@ async function upMecanico(mecanico){
             .input('ApeMatMecanico',sql.VarChar,mecanico.ApeMatMecanico)
             .input('CorreoMecanico',sql.VarChar,mecanico.CorreoMecanico)
             .input('TelefonoMecanico',sql.VarChar,mecanico.TelefonoMecanico)
-            .input('Area',sql.VarChar,mecanico.Area)
+            .input('Username',sql.VarChar,mecanico.Username)
+            .input('Contraseña',sql.VarChar,mecanico.Contraseña)
             .execute('pr_upMecanico');
 
         return upMecanico.recordsets;
@@ -81,10 +83,22 @@ async function delMecanico(IDMecanico){
         throw new Error ('Se presentó un error en el procedimiento almacenado eliminar mecanico');
     }
 }
+async function getMecanicoMov(mecanico){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request()
+        .input('Username',sql.VarChar,mecanico.Username)
+        .input('Contraseña', sql.VarChar,mecanico.Contraseña)
+        .query('select * from Mecanicos where Username= @Username AND Contraseña= @Contraseña');
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
 async function getIDMecanicos(){
     try{
         let pool=await sql.connect(conexion);
-        let salida=await pool.request().query('select IDMecanico from Mecanicos');
+        let salida=await pool.request().query("select IDMecanico from Mecanicos");
         return salida.recordsets;
     }catch(err){
         console.log(err);
@@ -96,5 +110,6 @@ module.exports={
     newMecanico:newMecanico,
     upMecanico:upMecanico,
     delMecanico:delMecanico,
+    getMecanicoMov:getMecanicoMov,
     getIDMecanicos:getIDMecanicos
 }
