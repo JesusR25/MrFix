@@ -5,14 +5,18 @@ class Empleado{
 		ApePatEmpleado,
         ApeMatEmpleado,
         CorreoEmpleado,
-        TelefonoEmpleado
+        TelefonoEmpleado,
+        Username,
+        Contrasena
     ){
         this.IDEmpleado,
 		this.NombreEmpleado,
 		this.ApePatEmpleado,
         this.ApeMatEmpleado,
         this.CorreoEmpleado,
-        this.TelefonoEmpleado
+        this.TelefonoEmpleado,
+        this.Username,
+        this.Contrasena
     }
 }
 module.exports=Empleado;

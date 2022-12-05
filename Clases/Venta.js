@@ -2,12 +2,15 @@ class Venta{
     constructor(
         IDVenta,
 		FechaVenta,
+        Total,
         IDCliente,
-        IDEmpleado,
+        IDEmpleado
+        
         
     ){
         this.IDVenta,
 		this.FechaVenta,
+        this.Total,
         this.IDCliente,
         this.IDEmpleado
 

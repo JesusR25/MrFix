@@ -6,7 +6,8 @@ class Mecanico{
         ApeMatMecanico,
         CorreoMecanico,
         TelefonoMecanico,
-        Area
+        Username,
+        Contrasena
     ){
         this.IDMecanico,
 		this.NombreMecanico,
@@ -14,7 +15,8 @@ class Mecanico{
         this.ApeMatMecanico,
         this.CorreoMecanico,
         this.TelefonoMecanico
-        this.Area
+        this.Username,
+        this.Contrasena
     }
 }
 module.exports=Mecanico;

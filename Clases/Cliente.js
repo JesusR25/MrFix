@@ -7,7 +7,7 @@ class Cliente{
         CorreoCliente,
         TelefonoCliente,
         Username,
-        Contraseña
+        Contrasena
     ){
         this.IDCliente,
 		this.NombreCliente,
@@ -16,7 +16,7 @@ class Cliente{
         this.CorreoCliente,
         this.TelefonoCliente,
         this.Username,
-        this.Contraseña
+        this.Contrasena
     }
 }
 module.exports=Cliente;

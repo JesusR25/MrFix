@@ -37,7 +37,7 @@ async function newMecanico(mecanico){
             .input('CorreoMecanico',sql.VarChar,mecanico.CorreoMecanico)
             .input('TelefonoMecanico',sql.VarChar,mecanico.TelefonoMecanico)
             .input('Username',sql.VarChar,mecanico.Username)
-            .input('Contraseña',sql.VarChar,mecanico.Contraseña)
+            .input('Contrasena',sql.VarChar,mecanico.Contrasena)
             .execute('pr_newMecanico');
 
         return newMecanico.recordsets;
@@ -46,6 +46,31 @@ async function newMecanico(mecanico){
         throw new Error ('Se presentó un error en el procedimiento almacenado agregar mecanico');
     }
 }
+
+async function getMecanicoUser(Username) {
+    try {
+        let pool = await sql.connect(conexion);
+        let salida = await pool.request()
+            .input('Username', sql.VarChar, Username)
+            .query('select * from Mecanicos where Username = @Username');
+        return salida.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getMecanicoCont(Contrasena) {
+    try {
+        let pool = await sql.connect(conexion);
+        let salida = await pool.request()
+            .input('Contrasena', sql.VarChar, Contrasena)
+            .query('select * from Mecanicos where Contrasena = @Contrasena');
+        return salida.recordsets;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 
 //Update de los servicios
 async function upMecanico(mecanico){
@@ -59,7 +84,7 @@ async function upMecanico(mecanico){
             .input('CorreoMecanico',sql.VarChar,mecanico.CorreoMecanico)
             .input('TelefonoMecanico',sql.VarChar,mecanico.TelefonoMecanico)
             .input('Username',sql.VarChar,mecanico.Username)
-            .input('Contraseña',sql.VarChar,mecanico.Contraseña)
+            .input('Contrasena',sql.VarChar,mecanico.Contrasena)
             .execute('pr_upMecanico');
 
         return upMecanico.recordsets;
@@ -88,8 +113,8 @@ async function getMecanicoMov(mecanico){
         let pool=await sql.connect(conexion);
         let salida=await pool.request()
         .input('Username',sql.VarChar,mecanico.Username)
-        .input('Contraseña', sql.VarChar,mecanico.Contraseña)
-        .query('select * from Mecanicos where Username= @Username AND Contraseña= @Contraseña');
+        .input('Contrasena', sql.VarChar,mecanico.Contrasena)
+        .query('select * from Mecanicos where Username= @Username AND Contrasena= @Contrasena');
         return salida.recordsets;
     }catch(err){
         console.log(err);
@@ -111,5 +136,7 @@ module.exports={
     upMecanico:upMecanico,
     delMecanico:delMecanico,
     getMecanicoMov:getMecanicoMov,
-    getIDMecanicos:getIDMecanicos
+    getIDMecanicos:getIDMecanicos,
+    getMecanicoCont: getMecanicoCont,
+    getMecanicoUser: getMecanicoUser
 }
