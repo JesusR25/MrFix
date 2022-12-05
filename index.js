@@ -178,6 +178,19 @@ router.route('/empleados').get((request,response)=>{
     })
 });
 
+
+router.route('/empleados/login/:Username').get((request, response) => {
+    empleadosWS.getEmpleadoUser(request.params.Username).then(result => {
+        response.json(result[0])
+    })
+});
+
+router.route('/empleados/loginc/:Contrasena').get((request, response) => {
+    empleadosWS.getEmpleadoCont(request.params.Contrasena).then(result => {
+        response.json(result[0])
+    })
+});
+
 //Ruta para obtener un empleado
 router.route('/empleados/consultar/:IDEmpleado').get((request,response)=>{
     empleadosWS.getEmpleado(request.params.IDEmpleado).then(result=>{
@@ -234,6 +247,19 @@ router.route('/mecanicos').get((request,response)=>{
 //Ruta para obtener un MECANICO
 router.route('/mecanicos/consultar/:IDMecanico').get((request,response)=>{
     mecanicosWS.getMecanico(request.params.IDMecanico).then(result=>{
+        response.json(result[0])
+    })
+});
+
+
+router.route('/mecanicos/login/:Username').get((request, response) => {
+    mecanicosWS.getMecanicoUser(request.params.Username).then(result => {
+        response.json(result[0])
+    })
+});
+
+router.route('/mecanicos/loginc/:Contrasena').get((request, response) => {
+    mecanicosWS.getMecanicoCont(request.params.Contrasena).then(result => {
         response.json(result[0])
     })
 });
