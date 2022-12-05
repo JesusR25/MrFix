@@ -93,7 +93,7 @@ async function getClienteMov(cliente){
         let pool=await sql.connect(conexion);
         let salida=await pool.request()
         .input('CorreoCliente',sql.VarChar,cliente.CorreoCliente)
-        .input('Contrasena', sql.VarChar,cliente.Contraseña)
+        .input('Contrasena', sql.VarChar,cliente.Contrasena)
         .query('select * from Clientes where CorreoCliente= @CorreoCliente AND Contrasena= @Contrasena');
         return salida.recordsets;
     }catch(err){
