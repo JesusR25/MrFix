@@ -131,11 +131,6 @@ router.route('/productos/consultar/:IDProducto').get((request,response)=>{
     })
 });
 
-router.route('/productos/np').get((request,response)=>{
-    productosWS.getNProductos().then(result=>{
-        response.json(result[0])
-    })
-});
 
 //Ruta para agregar un Producto
 router.route('/productos/agregar').post((request,response)=>{
@@ -181,12 +176,6 @@ router.route('/productos/idp').get((request,response)=>{
 //Ruta para obtener los Empleados
 router.route('/empleados').get((request,response)=>{
     empleadosWS.getEmpleados().then(result=>{
-        response.json(result[0])
-    })
-});
-
-router.route('/empleados/ne').get((request,response)=>{
-    empleadosWS.getNEmpleados().then(result=>{
         response.json(result[0])
     })
 });
@@ -258,11 +247,6 @@ router.route('/mecanicos').get((request,response)=>{
 });
 
 
-router.route('/mecanicos/nm').get((request,response)=>{
-    mecanicosWS.getNMecanicos().then(result=>{
-        response.json(result[0])
-    })
-});
 
 //Ruta para obtener un MECANICO
 router.route('/mecanicos/consultar/:IDMecanico').get((request,response)=>{
@@ -343,11 +327,6 @@ router.route('/clientes/consultar/:IDCliente').get((request,response)=>{
     })
 });
 
-router.route('/clientes/nc').get((request,response)=>{
-    clientesWS.getNCliente().then(result=>{
-        response.json(result[0])
-    })
-});
 
 //Ruta para agregar un cliente
 router.route('/clientes/agregar').post((request,response)=>{

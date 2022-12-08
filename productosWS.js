@@ -12,15 +12,7 @@ async function getProductos(){
     }
 }
 
-async function getNProductos(){
-    try{
-        let pool=await sql.connect(conexion);
-        let salida=await pool.request().query("select NombreProducto from Productos");
-        return salida.recordsets;
-    }catch(err){
-        console.log(err);
-    }
-}
+
 
 //Consulta un servicio especifico
 async function getProducto(IDProducto){
@@ -135,7 +127,6 @@ module.exports={
     getProducto:getProducto,
     newProducto:newProducto,  
     upProducto:upProducto,
-    getNProductos:getNProductos,
     delProducto:delProducto,
     getIDProductos:getIDProductos,
     getProductosDesc:getProductosDesc,

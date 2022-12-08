@@ -12,15 +12,7 @@ async function getEmpleados(){
     }
 }
 
-async function getNEmpleados(){
-    try{
-        let pool=await sql.connect(conexion);
-        let salida=await pool.request().query("select NombreCompleto=NombreEmpleado+' '+ApePatEmpleado+' '+ApeMatEmpleado from Empleados");
-        return salida.recordsets;
-    }catch(err){
-        console.log(err);
-    }
-}
+
 
 //Consulta un servicio especifico
 async function getEmpleado(IDEmpleado){
@@ -144,7 +136,6 @@ module.exports={
     getEmpleados:getEmpleados,
     getEmpleado:getEmpleado,
     newEmpleado:newEmpleado,
-    getNEmpleados:getNEmpleados,
     upEmpleado:upEmpleado,
     delEmpleado:delEmpleado,
     getEmpleadoMov:getEmpleadoMov,
