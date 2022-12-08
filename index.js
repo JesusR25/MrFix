@@ -130,6 +130,12 @@ router.route('/productos/consultar/:IDProducto').get((request,response)=>{
     })
 });
 
+router.route('/productos/np').get((request,response)=>{
+    productosWS.getNProductos().then(result=>{
+        response.json(result[0])
+    })
+});
+
 //Ruta para agregar un Producto
 router.route('/productos/agregar').post((request,response)=>{
     let Producto={...request.body}
@@ -174,6 +180,12 @@ router.route('/productos/idp').get((request,response)=>{
 //Ruta para obtener los Empleados
 router.route('/empleados').get((request,response)=>{
     empleadosWS.getEmpleados().then(result=>{
+        response.json(result[0])
+    })
+});
+
+router.route('/empleados/ne').get((request,response)=>{
+    empleadosWS.getNEmpleados().then(result=>{
         response.json(result[0])
     })
 });
@@ -240,6 +252,13 @@ router.route('/empleados/ide').get((request,response)=>{
 //Ruta para obtener los MECANICOS
 router.route('/mecanicos').get((request,response)=>{
     mecanicosWS.getMecanicos().then(result=>{
+        response.json(result[0])
+    })
+});
+
+
+router.route('/mecanicos/nm').get((request,response)=>{
+    mecanicosWS.getNMecanicos().then(result=>{
         response.json(result[0])
     })
 });
@@ -319,6 +338,12 @@ router.route('/clientes').get((request,response)=>{
 //Ruta para obtener un cliente
 router.route('/clientes/consultar/:IDCliente').get((request,response)=>{
     clientesWS.getCliente(request.params.IDCliente).then(result=>{
+        response.json(result[0])
+    })
+});
+
+router.route('/clientes/nc').get((request,response)=>{
+    clientesWS.getNCliente().then(result=>{
         response.json(result[0])
     })
 });

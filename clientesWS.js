@@ -25,6 +25,16 @@ async function getCliente(IDCliente){
     }
 }
 
+async function getNCliente(){
+    try{
+        let pool=await sql.connect(conexion);
+        let salida=await pool.request().query("select NombreCompleto=NombreCliente+' '+ApePatCliente+' '+ApeMatCliente from Clientes");
+        return salida.recordsets;
+    }catch(err){
+        console.log(err);
+    }
+}
+
 
 //Insert de los productos
 async function newCliente(cliente){
@@ -129,6 +139,7 @@ module.exports={
     getCliente:getCliente,
     newCliente:newCliente,
     upCliente:upCliente,
+    getNCliente:getNCliente,
     delCliente:delCliente,
     getClienteMov:getClienteMov,
     getClienteInf:getClienteInf,
